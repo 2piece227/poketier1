@@ -124,3 +124,66 @@ using (
   bucket_id = 'avatars'
   and split_part(name, '/', 1) = auth.uid()::text
 );
+
+-- ========== 커뮤니티: 게시물 / 댓글 / 좋아요 ==========
+-- Supabase SQL Editor에서 실행하세요.
+
+-- 게시물
+create table if not exists public.posts (
+  id             uuid primary key default gen_random_uuid(),
+  author_id      uuid references auth.users(id) on delete cascade not null,
+  author_nick    text not null default '익명',
+  title          text not null check (length(trim(title)) > 0),
+  description    text not null default '',
+  party          jsonb not null default '[]',
+  likes_count    int  not null default 0,
+  comments_count int  not null default 0,
+  created_at     timestamptz not null default now()
+);
+
+-- 댓글
+create table if not exists public.comments (
+  id          uuid primary key default gen_random_uuid(),
+  post_id     uuid references public.posts(id) on delete cascade not null,
+  author_id   uuid references auth.users(id) on delete cascade not null,
+  author_nick text not null default '익명',
+  content     text not null check (length(trim(content)) > 0),
+  created_at  timestamptz not null default now()
+);
+
+-- 좋아요 (post × user 고유)
+create table if not exists public.post_likes (
+  post_id    uuid references public.posts(id) on delete cascade not null,
+  user_id    uuid references auth.users(id) on delete cascade not null,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id)
+);
+
+-- RLS 활성화
+alter table public.posts       enable row level security;
+alter table public.comments    enable row level security;
+alter table public.post_likes  enable row level security;
+
+-- posts 정책
+drop policy if exists "posts_select_all"   on public.posts;
+drop policy if exists "posts_insert_auth"  on public.posts;
+drop policy if exists "posts_delete_own"   on public.posts;
+create policy "posts_select_all"   on public.posts for select using (true);
+create policy "posts_insert_auth"  on public.posts for insert to authenticated with check (auth.uid() = author_id);
+create policy "posts_delete_own"   on public.posts for delete using (auth.uid() = author_id);
+
+-- comments 정책
+drop policy if exists "comments_select_all"  on public.comments;
+drop policy if exists "comments_insert_auth" on public.comments;
+drop policy if exists "comments_delete_own"  on public.comments;
+create policy "comments_select_all"  on public.comments for select using (true);
+create policy "comments_insert_auth" on public.comments for insert to authenticated with check (auth.uid() = author_id);
+create policy "comments_delete_own"  on public.comments for delete using (auth.uid() = author_id);
+
+-- post_likes 정책
+drop policy if exists "likes_select_all"  on public.post_likes;
+drop policy if exists "likes_insert_auth" on public.post_likes;
+drop policy if exists "likes_delete_own"  on public.post_likes;
+create policy "likes_select_all"  on public.post_likes for select using (true);
+create policy "likes_insert_auth" on public.post_likes for insert to authenticated with check (auth.uid() = user_id);
+create policy "likes_delete_own"  on public.post_likes for delete using (auth.uid() = user_id);

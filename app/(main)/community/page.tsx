@@ -1,62 +1,98 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import pokemonData from "@/data/pokemon.json";
+import { timeAgo, type PokemonSlot } from "@/lib/party-constants";
 import "@/styles/community.css";
 
 export const metadata: Metadata = {
   title: "poketier | 커뮤니티",
-  description: "포켓티어 커뮤니티 글 목록",
+  description: "포켓티어 파티 커뮤니티",
 };
 
-export default function CommunityPage() {
+// 포켓몬 이름 → artwork URL
+function getArtwork(nameKo: string): string | null {
+  return pokemonData.find(p => p.nameKo === nameKo)?.artwork ?? null;
+}
+
+export default async function CommunityPage() {
+  const supabase = await createClient();
+
+  const { data: posts, error } = await supabase
+    .from("posts")
+    .select("id, title, description, party, author_nick, created_at, likes_count, comments_count")
+    .order("created_at", { ascending: false })
+    .limit(50);
+
   return (
     <main className="community-page">
       <div className="community-page-hero">
         <p className="section-label">COMMUNITY</p>
         <h1>커뮤니티</h1>
-        <p className="community-page-lead">
-          파티 공유·질문·토론 글이 모이는 공간입니다. 아래는 연동 전{" "}
-          <strong>초기 디자인</strong>이며, 메인에는 최근 글만 요약해 두었습니다.
-        </p>
+        <p className="community-page-lead">파티를 공유하고 의견을 나눠보세요.</p>
       </div>
 
       <section className="community-board card">
         <div className="community-toolbar">
           <div className="community-search">
-            <label className="visually-hidden" htmlFor="communitySearchInput">
-              글 검색
-            </label>
-            <input
-              id="communitySearchInput"
-              type="search"
-              placeholder="검색 (준비 중)"
-              disabled
-              aria-disabled="true"
-            />
+            <input type="search" placeholder="검색 (준비 중)" disabled />
           </div>
-          <button type="button" className="ghost-btn" disabled aria-disabled="true">
-            글쓰기
-          </button>
+          <Link href="/community/write" className="login-btn community-write-btn">
+            ✏️ 글쓰기
+          </Link>
         </div>
 
-        <div className="post-list">
-          {[
-            { title: "더블 입문 샘플 파티 공유합니다", desc: "초보도 운용하기 쉬운 밸런스형 샘플과 기본 운영 루트 정리.", tag: "샘플", views: 482, time: "10분 전" },
-            { title: "이번 주 랭크에서 체감 좋은 선봉 3종", desc: "실제 래더 기준으로 안정적인 선봉 기용 사례를 모았습니다.", tag: "공략", views: 327, time: "35분 전" },
-            { title: "신규 규칙 대응용 안티 메타 아이디어", desc: "상위권 조합 저격을 위한 기술/아이템 선택지 토론 스레드.", tag: "토론", views: 298, time: "1시간 전" },
-            { title: "포챔스 모바일 출시 대비 팀 빌딩 가이드", desc: "출시 초기 환경에서 바로 쓰기 좋은 범용 팀 템플릿을 소개합니다.", tag: "가이드", views: 612, time: "2시간 전" },
-            { title: "시즌 초반 추천 템포 포켓몬 정리", desc: "선공·후공 시나리오별로 묶어 본 샘플 메모입니다.", tag: "공략", views: 201, time: "3시간 전" },
-            { title: "라이트 유저도 보는 주간 메타 스레드", desc: "핵심만 골라 정리한 비공식 요약입니다.", tag: "토론", views: 156, time: "5시간 전" },
-          ].map((post) => (
-            <article key={post.title} className="post-item">
-              <h3>{post.title}</h3>
-              <p>{post.desc}</p>
-              <div className="post-meta">
-                <span>{post.tag}</span>
-                <span>조회 {post.views}</span>
-                <span>{post.time}</span>
-              </div>
-            </article>
-          ))}
-        </div>
+        {error ? (
+          <p className="community-empty">게시물을 불러올 수 없습니다. (테이블을 먼저 생성해주세요)</p>
+        ) : !posts?.length ? (
+          <p className="community-empty">아직 게시물이 없습니다. 첫 파티를 공유해보세요!</p>
+        ) : (
+          <div className="post-list">
+            {posts.map(post => {
+              const partySlots: PokemonSlot[] = Array.isArray(post.party) ? post.party : [];
+              const filled = partySlots.filter(s => s.pokemon).slice(0, 6);
+
+              return (
+                <Link key={post.id} href={`/community/${post.id}`} className="post-item">
+                  {/* 파티 포켓몬 이미지 6칸 */}
+                  <div className="post-party-sprites">
+                    {Array.from({ length: 6 }, (_, i) => {
+                      const slot = filled[i];
+                      const art  = slot ? getArtwork(slot.pokemon) : null;
+                      return art ? (
+                        <img
+                          key={i}
+                          src={art}
+                          alt={slot!.pokemon}
+                          title={slot!.pokemon}
+                          className="post-sprite"
+                        />
+                      ) : (
+                        <span key={i} className="post-sprite-empty" />
+                      );
+                    })}
+                  </div>
+
+                  {/* 글 정보 */}
+                  <div className="post-info">
+                    <h3 className="post-title">{post.title}</h3>
+                    {post.description && (
+                      <p className="post-desc">{post.description}</p>
+                    )}
+                    <div className="post-meta">
+                      <span className="post-author">{post.author_nick}</span>
+                      <span className="post-dot">·</span>
+                      <span className="post-time">{timeAgo(post.created_at)}</span>
+                      <span className="post-dot">·</span>
+                      <span className="post-stat">♥ {post.likes_count ?? 0}</span>
+                      <span className="post-stat">💬 {post.comments_count ?? 0}</span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </section>
     </main>
   );
