@@ -2,6 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import type { CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+// Supabase getUser()에 타임아웃을 걸어 네트워크 지연 시 무한 로딩 방지
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error("timeout")), ms)
+  );
+  return Promise.race([promise, timeout]);
+}
+
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
@@ -26,10 +34,19 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // 세션 쿠키를 갱신하기 위해 반드시 getUser() 호출 (getSession() 사용 금지)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // 3초 안에 응답 없으면 비로그인으로 간주하고 통과
+  let user = null;
+  try {
+    const result = await withTimeout(supabase.auth.getUser(), 3000);
+    user = result.data.user;
+  } catch {
+    // 타임아웃 또는 네트워크 오류 → 보호 페이지만 차단, 나머지는 통과
+    const { pathname } = request.nextUrl;
+    if (pathname === "/nickname" || pathname === "/profile") {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return supabaseResponse;
+  }
 
   const { pathname } = request.nextUrl;
 
