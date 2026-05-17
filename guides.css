@@ -1,0 +1,369 @@
+/* 가이드 페이지 — 초보자 친화 레이아웃 */
+
+.guide-page {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto 56px;
+  padding-top: 8px;
+}
+
+.guide-hero {
+  text-align: center;
+  padding: 8px 8px 28px;
+  margin-bottom: 8px;
+}
+
+.guide-hero .section-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #059669;
+}
+
+html[data-theme="dark"] .guide-hero .section-label {
+  color: #34d399;
+}
+
+.guide-hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 4.5vw, 36px);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.guide-hero-lead {
+  margin: 0 auto;
+  max-width: 42ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.guide-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border: 1px solid color-mix(in srgb, #10b981 28%, var(--line));
+  color: var(--text);
+}
+
+html[data-theme="dark"] .guide-hero-badge {
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+/* 빠른 시작 3단계 */
+.guide-quick {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 720px) {
+  .guide-quick {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guide-quick-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 20px 18px;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.guide-quick-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="dark"] .guide-quick-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+.guide-quick-num {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(145deg, #34d399 0%, #059669 100%);
+}
+
+.guide-quick-card h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.guide-quick-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* 섹션 공통 */
+.guide-section {
+  margin-bottom: 40px;
+}
+
+.guide-section-head {
+  margin-bottom: 16px;
+}
+
+.guide-section-head h2 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.guide-section-head p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* 기본 개념 카드 */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guide-concept {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--card) 100%, transparent);
+  padding: 18px 18px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.guide-concept-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: var(--nav-pill-bg);
+  border: 1px solid var(--nav-pill-border);
+}
+
+.guide-concept h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.guide-concept p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* 학습 로드맵 */
+.guide-roadmap {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  padding: 8px 0;
+  overflow: hidden;
+}
+
+.guide-step {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 4px 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.guide-step:last-child {
+  border-bottom: none;
+}
+
+.guide-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 800;
+  background: #eff6ff;
+  color: #1d4ed8;
+  grid-row: span 2;
+}
+
+html[data-theme="dark"] .guide-step-num {
+  background: rgba(30, 58, 138, 0.6);
+  color: #93c5fd;
+}
+
+.guide-step h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.guide-step p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  grid-column: 2;
+}
+
+/* FAQ */
+.guide-faq {
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: var(--card);
+  overflow: hidden;
+}
+
+.guide-faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-faq details:last-child {
+  border-bottom: none;
+}
+
+.guide-faq summary {
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.guide-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-faq summary::before {
+  content: "Q";
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
+}
+
+html[data-theme="dark"] .guide-faq summary::before {
+  color: #6ee7b7;
+}
+
+.guide-faq details[open] summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-faq .guide-answer {
+  margin: 0;
+  padding: 0 18px 18px 56px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* 하단 CTA */
+.guide-cta {
+  margin-top: 8px;
+  padding: 24px 22px;
+  border-radius: var(--radius-xl);
+  border: 1px dashed color-mix(in srgb, var(--primary) 35%, var(--line));
+  background: color-mix(in srgb, var(--primary) 6%, var(--card));
+  text-align: center;
+}
+
+.guide-cta p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.guide-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.guide-cta a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ghost-bg);
+  color: var(--nav-pill-fg);
+}
+
+.guide-cta a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.guide-cta a.guide-cta-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.guide-cta a.guide-cta-primary:hover {
+  filter: brightness(1.05);
+  color: #fff;
+}
+
+.top-nav a.is-current {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+html[data-theme="dark"] .top-nav a.is-current {
+  background: #1e3a8a;
+  border-color: #3b82f6;
+  color: #dbeafe;
+}

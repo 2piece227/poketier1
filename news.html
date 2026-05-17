@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 최신 정보</title>
+    <meta name="description" content="업데이트·대회·공략·가이드 등 포켓몬 최신 정보 — 초기 디자인 샘플" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./news.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <header class="site-header">
+      <a class="brand brand-link" href="./index.html" aria-label="메인으로 이동">
+        <div class="brand-badge">PT</div>
+        <div>
+          <p class="brand-name">poketier</p>
+          <p class="brand-sub">포켓티어</p>
+        </div>
+      </a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="./tierlist.html">티어·순위</a>
+        <a href="./community.html">커뮤니티</a>
+        <a href="./guides.html">가이드</a>
+        <a href="./news.html" class="is-current">최신 정보</a>
+      </nav>
+
+      <div class="auth-area auth-gate">
+        <button class="ghost-btn" id="loginBtn" type="button">로그인</button>
+        <button class="ghost-btn" id="profileBtn" type="button" hidden>프로필</button>
+        <button class="ghost-btn" id="logoutBtn" type="button" hidden>로그아웃</button>
+      </div>
+    </header>
+
+    <main class="news-page">
+      <div class="news-hero">
+        <p class="section-label">NEWS &amp; UPDATES</p>
+        <h1>최신 정보</h1>
+        <p class="news-lead">
+          패치·이벤트·대회·메타 해설을 한곳에서 모아 보여줄 예정입니다. 아래는 뉴스형 목록과 카테고리 필터
+          <strong>초기 디자인</strong>이며, 본문·썸네일은 샘플입니다.
+        </p>
+      </div>
+
+      <div class="news-filter">
+        <span class="news-filter-label">카테고리</span>
+        <div class="news-filter-chips" role="group" aria-label="뉴스 카테고리">
+          <button type="button" data-news-filter="all" class="is-active">전체</button>
+          <button type="button" data-news-filter="update">업데이트</button>
+          <button type="button" data-news-filter="tournament">대회</button>
+          <button type="button" data-news-filter="meta">메타·공략</button>
+          <button type="button" data-news-filter="guide">가이드</button>
+        </div>
+      </div>
+
+      <article class="news-featured" data-cats="update meta">
+        <a href="#" class="news-featured-link" aria-label="주요 기사 (샘플)">
+          <div class="news-featured-visual" role="presentation"></div>
+          <div class="news-featured-body">
+            <span class="news-tag">업데이트 · 메타</span>
+            <h2>시즌 규칙 개편과 추천 파티 트렌드 요약</h2>
+            <p>
+              규칙 변경이 랭크 상위 티어에 미친 영향을 짧게 정리했습니다. 실제 기사 연동 시 이 영역에 히어로 이미지와 요약이
+              들어갑니다.
+            </p>
+            <span class="news-meta">2026.3.28 · 편집부</span>
+          </div>
+        </a>
+      </article>
+
+      <h2 class="news-grid-title">최근 글</h2>
+      <div class="news-grid">
+        <article class="news-card" data-cats="tournament">
+          <a href="#" class="news-card-link">
+            <div class="news-card-thumb" role="presentation"></div>
+            <div class="news-card-body">
+              <span class="news-tag">대회</span>
+              <h3>지역 예선 일정·참가 방법 안내</h3>
+              <p class="news-excerpt">샘플 텍스트입니다. 대회 공지가 들어갈 카드입니다.</p>
+              <span class="news-meta">2026.3.26</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card" data-cats="meta">
+          <a href="#" class="news-card-link">
+            <div class="news-card-thumb news-card-thumb--b" role="presentation"></div>
+            <div class="news-card-body">
+              <span class="news-tag">메타·공략</span>
+              <h3>상위권 픽률 급상승 포켓몬 3종</h3>
+              <p class="news-excerpt">샘플 요약 문구입니다.</p>
+              <span class="news-meta">2026.3.25</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card" data-cats="guide">
+          <a href="#" class="news-card-link">
+            <div class="news-card-thumb news-card-thumb--c" role="presentation"></div>
+            <div class="news-card-body">
+              <span class="news-tag">가이드</span>
+              <h3>초보자를 위한 첫 랭크 준비물</h3>
+              <p class="news-excerpt">샘플 가이드 카드입니다.</p>
+              <span class="news-meta">2026.3.22</span>
+            </div>
+          </a>
+        </article>
+
+        <article class="news-card" data-cats="update">
+          <a href="#" class="news-card-link">
+            <div class="news-card-thumb news-card-thumb--d" role="presentation"></div>
+            <div class="news-card-body">
+              <span class="news-tag">업데이트</span>
+              <h3>밸런스 패치 노트 하이라이트</h3>
+              <p class="news-excerpt">스킬·기술 변경 요약 샘플.</p>
+              <span class="news-meta">2026.3.20</span>
+            </div>
+          </a>
+        </article>
+      </div>
+
+      <div class="news-more">
+        <button type="button" class="news-more-btn" disabled aria-disabled="true">더 보기 (준비 중)</button>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 poketier. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./script.js"></script>
+    <script src="./news.js"></script>
+  </body>
+</html>

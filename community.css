@@ -1,0 +1,79 @@
+/* 커뮤니티 전용 페이지 */
+
+.community-page {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto 48px;
+  padding-top: 8px;
+}
+
+.community-page-hero {
+  margin-bottom: 22px;
+}
+
+.community-page-hero .section-label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+}
+
+.community-page-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 4vw, 30px);
+  letter-spacing: -0.03em;
+}
+
+.community-page-lead {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.community-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.community-search {
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+
+.community-search input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ghost-bg);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.community-search input::placeholder {
+  color: var(--muted);
+}
+
+.community-board {
+  padding: 24px;
+}
+
+.top-nav a.is-current {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+html[data-theme="dark"] .top-nav a.is-current {
+  background: #1e3a8a;
+  border-color: #3b82f6;
+  color: #dbeafe;
+}

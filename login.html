@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 로그인</title>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <header class="login-header">
+      <a class="login-brand" href="./index.html" aria-label="메인으로 이동">
+        <span class="login-brand-badge">PT</span>
+        <span class="login-brand-text">poketier</span>
+      </a>
+    </header>
+
+    <main class="login-page auth-gate">
+      <section class="login-card">
+        <a href="./index.html" class="logo">poketier</a>
+        <h1>무엇으로 로그인하시겠습니까?</h1>
+        <button id="googleLoginBtn" class="login-btn" type="button">구글로 로그인</button>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 커뮤니티</title>
+    <meta name="description" content="포켓티어 커뮤니티 글 목록 — 초기 디자인" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./community.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <header class="site-header">
+      <a class="brand brand-link" href="./index.html" aria-label="메인으로 이동">
+        <div class="brand-badge">PT</div>
+        <div>
+          <p class="brand-name">poketier</p>
+          <p class="brand-sub">포켓티어</p>
+        </div>
+      </a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="./tierlist.html">티어·순위</a>
+        <a href="./community.html" class="is-current">커뮤니티</a>
+        <a href="./guides.html">가이드</a>
+        <a href="./news.html">최신 정보</a>
+      </nav>
+
+      <div class="auth-area auth-gate">
+        <button class="ghost-btn" id="loginBtn" type="button">로그인</button>
+        <button class="ghost-btn" id="profileBtn" type="button" hidden>프로필</button>
+        <button class="ghost-btn" id="logoutBtn" type="button" hidden>로그아웃</button>
+      </div>
+    </header>
+
+    <main class="community-page">
+      <div class="community-page-hero">
+        <p class="section-label">COMMUNITY</p>
+        <h1>커뮤니티</h1>
+        <p class="community-page-lead">
+          파티 공유·질문·토론 글이 모이는 공간입니다. 아래는 연동 전 <strong>초기 디자인</strong>이며, 메인에는 최근 글만 요약해 두었습니다.
+        </p>
+      </div>
+
+      <section class="community-board card">
+        <div class="community-toolbar">
+          <div class="community-search">
+            <label class="visually-hidden" for="communitySearchInput">글 검색</label>
+            <input
+              id="communitySearchInput"
+              type="search"
+              placeholder="검색 (준비 중)"
+              disabled
+              aria-disabled="true"
+            />
+          </div>
+          <button type="button" class="ghost-btn" disabled aria-disabled="true">글쓰기</button>
+        </div>
+
+        <div class="post-list">
+          <article class="post-item">
+            <h3>더블 입문 샘플 파티 공유합니다</h3>
+            <p>초보도 운용하기 쉬운 밸런스형 샘플과 기본 운영 루트 정리.</p>
+            <div class="post-meta"><span>샘플</span><span>조회 482</span><span>10분 전</span></div>
+          </article>
+          <article class="post-item">
+            <h3>이번 주 랭크에서 체감 좋은 선봉 3종</h3>
+            <p>실제 래더 기준으로 안정적인 선봉 기용 사례를 모았습니다.</p>
+            <div class="post-meta"><span>공략</span><span>조회 327</span><span>35분 전</span></div>
+          </article>
+          <article class="post-item">
+            <h3>신규 규칙 대응용 안티 메타 아이디어</h3>
+            <p>상위권 조합 저격을 위한 기술/아이템 선택지 토론 스레드.</p>
+            <div class="post-meta"><span>토론</span><span>조회 298</span><span>1시간 전</span></div>
+          </article>
+          <article class="post-item">
+            <h3>포챔스 모바일 출시 대비 팀 빌딩 가이드</h3>
+            <p>출시 초기 환경에서 바로 쓰기 좋은 범용 팀 템플릿을 소개합니다.</p>
+            <div class="post-meta"><span>가이드</span><span>조회 612</span><span>2시간 전</span></div>
+          </article>
+          <article class="post-item">
+            <h3>시즌 초반 추천 템포 포켓몬 정리</h3>
+            <p>선공·후공 시나리오별로 묶어 본 샘플 메모입니다.</p>
+            <div class="post-meta"><span>공략</span><span>조회 201</span><span>3시간 전</span></div>
+          </article>
+          <article class="post-item">
+            <h3>라이트 유저도 보는 주간 메타 스레드</h3>
+            <p>핵심만 골라 정리한 비공식 요약입니다.</p>
+            <div class="post-meta"><span>토론</span><span>조회 156</span><span>5시간 전</span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 poketier. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 통합 티어</title>
+    <meta name="description" content="더블배틀 기준 역할별 티어 구간 — 초기 디자인 샘플" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./tierlist.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <header class="site-header">
+      <a class="brand brand-link" href="./index.html" aria-label="메인으로 이동">
+        <div class="brand-badge">PT</div>
+        <div>
+          <p class="brand-name">poketier</p>
+          <p class="brand-sub">포켓티어</p>
+        </div>
+      </a>
+
+      <nav class="top-nav" aria-label="주요 메뉴">
+        <a href="./tierlist.html" class="is-current">티어·순위</a>
+        <a href="./community.html">커뮤니티</a>
+        <a href="./guides.html">가이드</a>
+        <a href="./news.html">최신 정보</a>
+      </nav>
+
+      <div class="auth-area auth-gate">
+        <button class="ghost-btn" id="loginBtn" type="button">로그인</button>
+        <button class="ghost-btn" id="profileBtn" type="button" hidden>프로필</button>
+        <button class="ghost-btn" id="logoutBtn" type="button" hidden>로그아웃</button>
+      </div>
+    </header>
+
+    <main class="tier-page">
+      <div class="tier-page-hero">
+        <p class="section-label">TIER &amp; RANK</p>
+        <h1>통합 티어리스트</h1>
+        <p class="tier-page-lead">
+          티어리스트와 순위표를 한 화면에서 볼 수 있도록 묶었습니다. 아래는 역할 필터와 1~5티어 샘플 레이아웃이며, 데이터는 연동 전
+          <strong>디자인 확인용</strong>입니다.
+        </p>
+      </div>
+
+      <div class="tier-filter">
+        <span class="tier-filter-label">역할 범주</span>
+        <div class="tier-filter-chips" role="group" aria-label="역할 필터">
+          <button type="button" data-role-filter="all" class="is-active">전체</button>
+          <button type="button" data-role-filter="physical">물리 딜러</button>
+          <button type="button" data-role-filter="special">특수 딜러</button>
+          <button type="button" data-role-filter="physical-tank">물리 막이</button>
+          <button type="button" data-role-filter="special-tank">특수 막이</button>
+          <button type="button" data-role-filter="pivot">기점잡이</button>
+        </div>
+      </div>
+
+      <div class="tier-board">
+        <section class="tier-section" data-tier="1" aria-labelledby="tier-1-title">
+          <div class="tier-section-inner">
+            <div class="tier-rank">
+              <span class="tier-num tier-num--1" aria-hidden="true">1</span>
+              <div>
+                <p id="tier-1-title" class="tier-rank-title">1티어</p>
+                <p class="tier-rank-hint">최상위</p>
+              </div>
+            </div>
+            <div class="tier-mons">
+              <div class="tier-mon" data-roles="physical special">
+                <span>샘플 A</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--physical">물딜</span>
+                  <span class="tier-tag tier-tag--special">특딜</span>
+                </span>
+              </div>
+              <div class="tier-mon" data-roles="pivot physical-tank">
+                <span>샘플 B</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--pivot">기점</span>
+                  <span class="tier-tag tier-tag--physical-tank">물막</span>
+                </span>
+              </div>
+              <p class="tier-empty-hint">이 티어에서 선택한 역할에 맞는 포켓몬이 없습니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="tier-section" data-tier="2">
+          <div class="tier-section-inner">
+            <div class="tier-rank">
+              <span class="tier-num tier-num--2">2</span>
+              <div>
+                <p class="tier-rank-title">2티어</p>
+                <p class="tier-rank-hint">상위권</p>
+              </div>
+            </div>
+            <div class="tier-mons">
+              <div class="tier-mon" data-roles="special special-tank">
+                <span>샘플 C</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--special">특딜</span>
+                  <span class="tier-tag tier-tag--special-tank">특막</span>
+                </span>
+              </div>
+              <div class="tier-mon" data-roles="physical">
+                <span>샘플 D</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--physical">물딜</span>
+                </span>
+              </div>
+              <p class="tier-empty-hint">이 티어에서 선택한 역할에 맞는 포켓몬이 없습니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="tier-section" data-tier="3">
+          <div class="tier-section-inner">
+            <div class="tier-rank">
+              <span class="tier-num tier-num--3">3</span>
+              <div>
+                <p class="tier-rank-title">3티어</p>
+                <p class="tier-rank-hint">중위</p>
+              </div>
+            </div>
+            <div class="tier-mons">
+              <div class="tier-mon" data-roles="physical-tank pivot">
+                <span>샘플 E</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--physical-tank">물막</span>
+                  <span class="tier-tag tier-tag--pivot">기점</span>
+                </span>
+              </div>
+              <div class="tier-mon" data-roles="special">
+                <span>샘플 F</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--special">특딜</span>
+                </span>
+              </div>
+              <p class="tier-empty-hint">이 티어에서 선택한 역할에 맞는 포켓몬이 없습니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="tier-section" data-tier="4">
+          <div class="tier-section-inner">
+            <div class="tier-rank">
+              <span class="tier-num tier-num--4">4</span>
+              <div>
+                <p class="tier-rank-title">4티어</p>
+                <p class="tier-rank-hint">실전 보조</p>
+              </div>
+            </div>
+            <div class="tier-mons">
+              <div class="tier-mon" data-roles="special-tank">
+                <span>샘플 G</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--special-tank">특막</span>
+                </span>
+              </div>
+              <p class="tier-empty-hint">이 티어에서 선택한 역할에 맞는 포켓몬이 없습니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="tier-section" data-tier="5">
+          <div class="tier-section-inner">
+            <div class="tier-rank">
+              <span class="tier-num tier-num--5">5</span>
+              <div>
+                <p class="tier-rank-title">5티어</p>
+                <p class="tier-rank-hint">참고</p>
+              </div>
+            </div>
+            <div class="tier-mons">
+              <div class="tier-mon" data-roles="physical pivot">
+                <span>샘플 H</span>
+                <span class="tier-mon-roles">
+                  <span class="tier-tag tier-tag--physical">물딜</span>
+                  <span class="tier-tag tier-tag--pivot">기점</span>
+                </span>
+              </div>
+              <p class="tier-empty-hint">이 티어에서 선택한 역할에 맞는 포켓몬이 없습니다.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 poketier. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./script.js"></script>
+    <script src="./tierlist.js"></script>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 프로필</title>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <header class="login-header login-header--simple">
+      <a class="login-brand" href="./index.html" aria-label="메인으로 이동">
+        <span class="login-brand-badge">PT</span>
+        <span class="login-brand-text">poketier</span>
+      </a>
+    </header>
+
+    <main class="login-page profile-page-wrap auth-gate">
+      <div class="profile-grid">
+        <section class="login-card profile-card profile-card--identity">
+          <p class="logo">프로필</p>
+
+          <div class="profile-avatar-wrap">
+            <img
+              id="profileAvatarImg"
+              class="profile-avatar profile-avatar--photo"
+              src="./assets/default-avatar.png"
+              alt="프로필 사진"
+              decoding="async"
+            />
+          </div>
+          <input id="avatarInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden />
+          <button id="avatarChangeBtn" class="ghost-secondary-btn profile-avatar-btn" type="button">
+            프로필 사진 변경
+          </button>
+          <p id="avatarMsg" class="helper-text" hidden></p>
+
+          <h1 id="profileNickname">불러오는 중...</h1>
+
+          <div class="profile-nick-block">
+            <label class="field-label profile-label-left" for="nicknameInput">닉네임</label>
+            <div class="nickname-row">
+              <input id="nicknameInput" class="login-input" type="text" maxlength="16" placeholder="닉네임" />
+              <button id="checkNicknameBtn" class="ghost-secondary-btn nickname-check-btn" type="button">
+                중복 확인
+              </button>
+            </div>
+            <button id="saveNicknameBtn" class="login-btn profile-save-btn" type="button">닉네임 저장</button>
+            <p id="nicknameMsg" class="helper-text" hidden></p>
+          </div>
+
+          <p id="profileEmail" class="helper-text profile-email"></p>
+
+          <button id="goMainBtn" class="login-btn profile-go-main" type="button">메인으로 이동</button>
+          <button id="profileLogoutBtn" class="ghost-secondary-btn profile-logout" type="button">로그아웃</button>
+        </section>
+
+        <section class="login-card profile-card profile-card--settings">
+          <h2 class="settings-title">설정</h2>
+
+          <div class="settings-block">
+            <span class="field-label">화면 테마</span>
+            <div class="theme-toggle" role="group" aria-label="테마 선택">
+              <button type="button" id="themeLightBtn" class="theme-btn is-active">화이트</button>
+              <button type="button" id="themeDarkBtn" class="theme-btn">다크</button>
+            </div>
+          </div>
+
+          <div class="settings-block settings-block--contact">
+            <span class="field-label">문의</span>
+            <p class="contact-copy">
+              서비스 이용·버그 제보·제휴 등은 아래로 연락 주세요. (추후 폼·티켓 시스템 연동 예정)
+            </p>
+            <a class="contact-link" id="contactMailLink" href="mailto:poketier@example.com">이메일 문의하기</a>
+            <p class="helper-text contact-hint">운영 메일 주소는 배포 시 실제 주소로 바꿔주세요.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./profile.js"></script>
+  </body>
+</html>

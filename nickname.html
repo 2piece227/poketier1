@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko" class="auth-checking">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./theme-init.js"></script>
+    <title>poketier | 닉네임 설정</title>
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <header class="login-header">
+      <a class="login-brand" href="./index.html" aria-label="메인으로 이동">
+        <span class="login-brand-badge">PT</span>
+        <span class="login-brand-text">poketier</span>
+      </a>
+    </header>
+
+    <main class="login-page auth-gate">
+      <section class="login-card">
+        <p class="logo">첫 가입 환영합니다</p>
+        <h1>무엇으로 불릴까요?</h1>
+        <input id="nicknameInput" class="login-input" type="text" placeholder="닉네임을 입력하세요" maxlength="16" />
+        <button id="saveNicknameBtn" class="login-btn" type="button">닉네임 저장</button>
+        <p id="nicknameError" class="helper-text" hidden></p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./nickname.js"></script>
+  </body>
+</html>
